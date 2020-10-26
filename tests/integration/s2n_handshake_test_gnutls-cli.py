@@ -33,6 +33,8 @@ from s2n_test_constants import *
 # A container to make passing the return values from an attempted handshake more convenient
 HANDSHAKE_RC = collections.namedtuple('HANDSHAKE_RC', 'handshake_success gnutls_stdout')
 
+LIBCRYPTO_SUPPORT_X25519 = ['openssl-1.1.1']
+
 # Helper to print just the SHA256 portion of SIGN-RSA-SHA256
 def sigalg_str_from_list(sigalgs):
     # strip the first nine bytes from each name for "SIGN-RSA", 11 for "SIGN-ECDSA"
@@ -328,7 +330,9 @@ def main():
                 return -1
 
     # Produce permutations of every curve s2n supports in every possible order
-    curves = ["CURVE-SECP256R1", "CURVE-SECP384R1", "CURVE-SECP521R1", "CURVE-X25519"]
+    curves = ["CURVE-SECP256R1", "CURVE-SECP384R1", "CURVE-SECP521R1"]
+    if args.libcrypto in LIBCRYPTO_SUPPORT_X25519:
+        curves.append("CURVE-X25519")
     for size in range(1, len(curves) + 1):
         print("\n\tTesting named curve preferences of size: " + str(size))
         threadpool = create_thread_pool()
