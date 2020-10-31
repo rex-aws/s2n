@@ -330,7 +330,9 @@ def main():
                 return -1
 
     # Produce permutations of every curve s2n supports in every possible order
-    curves = ["CURVE-SECP256R1", "CURVE-SECP384R1", "CURVE-SECP521R1"]
+    curves = ["CURVE-SECP256R1", "CURVE-SECP384R1"]
+    if not fips_mode:
+        curves.append("CURVE-SECP521R1")
     if args.libcrypto in LIBCRYPTO_SUPPORT_X25519:
         curves.append("CURVE-X25519")
     for size in range(1, len(curves) + 1):
