@@ -333,8 +333,8 @@ def main():
     curves = ["CURVE-SECP256R1", "CURVE-SECP384R1"]
     if not fips_mode:
         curves.append("CURVE-SECP521R1")
-    if args.libcrypto in LIBCRYPTO_SUPPORT_X25519:
-        curves.append("CURVE-X25519")
+    # if args.libcrypto in LIBCRYPTO_SUPPORT_X25519:
+    #     curves.append("CURVE-X25519")
     for size in range(1, len(curves) + 1):
         print("\n\tTesting named curve preferences of size: " + str(size))
         threadpool = create_thread_pool()
