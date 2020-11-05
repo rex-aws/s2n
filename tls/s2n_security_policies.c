@@ -507,18 +507,6 @@ const struct s2n_security_policy security_policy_test_all_tls13 = {
     .ecc_preferences = &s2n_ecc_preferences_test_all,
 };
 
-const struct s2n_security_policy security_policy_test_all_tls12 = {
-    .minimum_protocol_version = S2N_SSLv3,
-    .cipher_preferences = &cipher_preferences_test_all_tls12,
-#if !defined(S2N_NO_PQ)
-    .kem_preferences = &kem_preferences_kms_pq_tls_1_0_2020_07,
-#else
-    .kem_preferences = &kem_preferences_null,
-#endif
-    .signature_preferences = &s2n_signature_preferences_20201021,
-    .ecc_preferences = &s2n_ecc_preferences_20201021,
-};
-
 const struct s2n_security_policy security_policy_test_ecdsa_priority = {
     .minimum_protocol_version = S2N_SSLv3,
     .cipher_preferences = &cipher_preferences_test_ecdsa_priority,
