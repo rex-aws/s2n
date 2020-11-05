@@ -43,7 +43,7 @@ def sigalg_str_from_list(sigalgs):
 def try_gnutls_handshake(endpoint, port, priority_str, mfl_extension_test, enter_fips_mode=False):
     # Fire up s2nd
     s2nd_cmd = ["../../bin/s2nd", str(endpoint), str(port)]
-    s2nd_ciphers = "test_all_tls13"
+    s2nd_ciphers = "test_all_tls12"
 
     if enter_fips_mode == True:
         s2nd_ciphers = "test_all_fips"
@@ -333,8 +333,6 @@ def main():
     curves = ["CURVE-SECP256R1", "CURVE-SECP384R1"]
     if not fips_mode:
         curves.append("CURVE-SECP521R1")
-    # if args.libcrypto in LIBCRYPTO_SUPPORT_X25519:
-    #     curves.append("CURVE-X25519")
     for size in range(1, len(curves) + 1):
         print("\n\tTesting named curve preferences of size: " + str(size))
         threadpool = create_thread_pool()
